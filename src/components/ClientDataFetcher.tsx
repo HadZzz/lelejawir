@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import ProductCard from '@/components/ProductCard';
 import type { Product } from '@/components/ProductCard';
 import { Gallery } from '@/types/gallery';
@@ -111,9 +112,11 @@ const ClientDataFetcher = () => {
               {gallery.map((item) => (
                 <div key={item.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className="aspect-square bg-gray-200 overflow-hidden">
-                    <img
+                    <Image
                       src={item.imageUrl}
                       alt={item.title}
+                      width={400}
+                      height={400}
                       className="w-full h-full object-cover"
                     />
                   </div>

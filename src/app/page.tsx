@@ -1,8 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Gallery } from "@/types/gallery";
-import ProductCard from "@/components/ProductCard";
-import type { Product } from "@/components/ProductCard";
 import DebugInfo from "@/components/DebugInfo";
 import ClientDataFetcher from "@/components/ClientDataFetcher";
 

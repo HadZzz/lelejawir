@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 // GET /api/gallery - Get all gallery items
@@ -20,7 +20,7 @@ export const GET = async () => {
 };
 
 // POST /api/gallery - Create new gallery item
-export const POST = async (request: any) => {
+export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json();
     const { title, description, imageUrl, category } = body;

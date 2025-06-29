@@ -1,27 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Gallery } from "@/types/gallery";
 
-// Fetch gallery data
-async function getGalleryData(): Promise<Gallery[]> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/gallery`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) {
-      console.error('Failed to fetch gallery data');
-      return [];
-    }
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching gallery data:', error);
-    return [];
-  }
-}
-
-const HomePage = async () => {
-  const galleryData = await getGalleryData();
-
+const HomePage = () => {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -186,42 +165,19 @@ const HomePage = async () => {
               Lihat langsung kondisi kolam dan proses budidaya lele kami
             </p>
           </div>
-          {galleryData.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryData.map((item) => (
-                <div key={item.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                  <div className="aspect-square bg-gray-200 overflow-hidden">
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.title}
-                      width={400}
-                      height={400}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-800 mb-2">{item.title}</h3>
-                    {item.description && (
-                      <p className="text-gray-600 text-sm mb-2">{item.description}</p>
-                    )}
-                    {item.category && (
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-                        {item.category}
-                      </span>
-                    )}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <div key={item} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div className="aspect-square bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                  <span className="text-4xl">🐟</span>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-4xl">🐟</span>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-800">Kolam {item}</h3>
+                  <p className="text-gray-600 text-sm">Kondisi terawat dan bersih</p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Belum Ada Galeri</h3>
-              <p className="text-gray-600">Galeri akan ditampilkan di sini</p>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -242,28 +198,28 @@ const HomePage = async () => {
               <p className="text-gray-600 mb-4 italic">
                 &quot;Lele yang sangat segar dan berkualitas. Pengiriman cepat dan pelayanan ramah. Sudah langganan 2 tahun!&quot;
               </p>
-              <div className="font-semibold text-gray-800">Budi Santoso</div>
-              <div className="text-sm text-gray-500">Warung Makan Sederhana</div>
+              <h4 className="font-semibold text-gray-800">Budi Santoso</h4>
+              <p className="text-gray-500 text-sm">Restoran Seafood</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">👤</span>
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;Kualitas lele yang konsisten dan harga yang terjangkau. Pelanggan saya sangat puas dengan hasilnya.&quot;
+                &quot;Harga terjangkau dengan kualitas premium. Lele segar dan tidak berbau amis. Recommended!&quot;
               </p>
-              <div className="font-semibold text-gray-800">Siti Aminah</div>
-              <div className="text-sm text-gray-500">Catering Keluarga</div>
+              <h4 className="font-semibold text-gray-800">Siti Aminah</h4>
+              <p className="text-gray-500 text-sm">Pemilik Warung</p>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center">
               <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">👤</span>
               </div>
               <p className="text-gray-600 mb-4 italic">
-                &quot;Pengiriman tepat waktu dan lele selalu segar. Sudah menjadi supplier tetap untuk restoran kami.&quot;
+                &quot;Pelayanan sangat memuaskan. Lele segar dan ukuran konsisten. Akan order lagi!&quot;
               </p>
-              <div className="font-semibold text-gray-800">Ahmad Rizki</div>
-              <div className="text-sm text-gray-500">Restoran Seafood</div>
+              <h4 className="font-semibold text-gray-800">Ahmad Rizki</h4>
+              <p className="text-gray-500 text-sm">Catering</p>
             </div>
           </div>
         </div>
@@ -300,12 +256,11 @@ const HomePage = async () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">Siap Memesan?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Dapatkan lele segar berkualitas tinggi langsung dari kolam kami. 
-            Hubungi kami sekarang untuk pemesanan.
+          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+            Hubungi kami sekarang untuk mendapatkan lele segar berkualitas dengan harga terbaik
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
@@ -327,4 +282,4 @@ const HomePage = async () => {
   );
 };
 
-export default HomePage;
+export default HomePage; 

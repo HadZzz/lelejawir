@@ -8,13 +8,20 @@ function getToken(req: NextRequest) {
   return auth.replace("Bearer ", "");
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    console.log('=== PRODUCTS GET REQUEST ===');
+    console.log('Request headers:', Object.fromEntries(req.headers.entries()));
+    console.log('Request method:', req.method);
+    console.log('Request URL:', req.url);
+    
     console.log('Fetching products from database...');
     const products = await prisma.product.findMany({
       orderBy: { createdAt: 'desc' }
     });
     console.log(`Found ${products.length} products`);
+    
+    console.log('Returning products successfully');
     return NextResponse.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);

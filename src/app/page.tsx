@@ -31,11 +31,11 @@ async function getGalleryData(): Promise<Gallery[]> {
   }
 }
 
-// Fetch product data
+// Fetch product data - temporarily using simple API
 async function getProductData() {
   try {
     console.log('Fetching product data...');
-    const response = await fetch(getApiUrl('/api/products'), {
+    const response = await fetch(getApiUrl('/api/products-simple'), {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

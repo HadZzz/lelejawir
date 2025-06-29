@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Gallery } from "@/types/gallery";
 import ProductCard from "@/components/ProductCard";
+import type { Product } from "@/components/ProductCard";
 
 // Fetch gallery data
 async function getGalleryData(): Promise<Gallery[]> {
@@ -88,7 +89,7 @@ const HomePage = async () => {
           </div>
           {productData.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {productData.map((product: any) => (
+              {productData.map((product: Product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

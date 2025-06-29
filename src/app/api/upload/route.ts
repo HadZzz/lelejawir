@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
+import axios from 'axios';
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,57 +8,48 @@ export async function POST(request: NextRequest) {
     
     if (!file) {
       return NextResponse.json(
-        { error: 'No file uploaded' },
+        { error: 'No file provided' },
         { status: 400 }
       );
     }
 
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-      return NextResponse.json(
-        { error: 'Only image files are allowed' },
-        { status: 400 }
-      );
-    }
-
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json(
-        { error: 'File size must be less than 5MB' },
-        { status: 400 }
-      );
-    }
-
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
-    // Generate unique filename
+    // Convert file to base64
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const timestamp = Date.now();
-    const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-    const filename = `${timestamp}_${originalName}`;
-    const filepath = join(uploadsDir, filename);
+    const base64 = buffer.toString('base64');
 
-    // Save file
-    await writeFile(filepath, buffer);
+    // Upload to ImgBB
+    const imgbbResponse = await axios.post(
+      'https://api.imgbb.com/1/upload',
+      {
+        key: '1047e3a6df288f011d954b8ddc2a5fd4', // User's ImgBB API key
+        image: base64,
+        name: file.name,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
 
-    // Return the public URL
-    const imageUrl = `/uploads/${filename}`;
-
-    return NextResponse.json({ 
-      success: true, 
-      imageUrl,
-      filename 
-    });
-
+    if (imgbbResponse.data.success) {
+      const imageUrl = imgbbResponse.data.data.url;
+      return NextResponse.json({ 
+        success: true, 
+        imageUrl: imageUrl,
+        deleteUrl: imgbbResponse.data.data.delete_url 
+      });
+    } else {
+      return NextResponse.json(
+        { error: 'Failed to upload to ImgBB' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json(
-      { error: 'Failed to upload file' },
+      { error: 'Upload failed' },
       { status: 500 }
     );
   }

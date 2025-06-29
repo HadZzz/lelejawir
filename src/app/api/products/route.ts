@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { verifyJWT } from "@/utils/jwt";
-
-const prisma = new PrismaClient();
 
 function getToken(req: NextRequest) {
   const auth = req.headers.get("authorization");
@@ -11,8 +9,17 @@ function getToken(req: NextRequest) {
 }
 
 export async function GET() {
-  const products = await prisma.product.findMany();
-  return NextResponse.json(products);
+  try {
+    console.log('Fetching products from database...');
+    const products = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+    console.log(`Found ${products.length} products`);
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {

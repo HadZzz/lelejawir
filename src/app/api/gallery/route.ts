@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import { verifyJWT } from '@/utils/jwt';
-
-const prisma = new PrismaClient();
 
 // GET /api/gallery - Get all gallery items
 export const GET = async () => {
   try {
+    console.log('Fetching gallery from database...');
     const gallery = await prisma.gallery.findMany({
       orderBy: { createdAt: 'desc' }
     });
-    
+    console.log(`Found ${gallery.length} gallery items`);
     return NextResponse.json(gallery);
   } catch (error) {
     console.error('Error fetching gallery:', error);

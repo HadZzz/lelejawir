@@ -3,18 +3,27 @@ import Image from "next/image";
 import { Gallery } from "@/types/gallery";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/components/ProductCard";
+import DebugInfo from "@/components/DebugInfo";
 
 // Fetch gallery data
 async function getGalleryData(): Promise<Gallery[]> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/gallery`, {
-      cache: 'no-store'
+    console.log('Fetching gallery data...');
+    const response = await fetch('/api/gallery', {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
+    
     if (!response.ok) {
-      console.error('Failed to fetch gallery data');
+      console.error('Failed to fetch gallery data:', response.status, response.statusText);
       return [];
     }
-    return response.json();
+    
+    const data = await response.json();
+    console.log('Gallery data fetched:', data.length, 'items');
+    return data;
   } catch (error) {
     console.error('Error fetching gallery data:', error);
     return [];
@@ -24,14 +33,22 @@ async function getGalleryData(): Promise<Gallery[]> {
 // Fetch product data
 async function getProductData() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/products`, {
-      cache: 'no-store'
+    console.log('Fetching product data...');
+    const response = await fetch('/api/products', {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
+    
     if (!response.ok) {
-      console.error('Failed to fetch product data');
+      console.error('Failed to fetch product data:', response.status, response.statusText);
       return [];
     }
-    return response.json();
+    
+    const data = await response.json();
+    console.log('Product data fetched:', data.length, 'items');
+    return data;
   } catch (error) {
     console.error('Error fetching product data:', error);
     return [];
@@ -39,11 +56,21 @@ async function getProductData() {
 }
 
 const HomePage = async () => {
+  console.log('HomePage component rendering...');
+  
   const galleryData = await getGalleryData();
   const productData = await getProductData();
+  
+  console.log('HomePage data loaded:', {
+    products: productData.length,
+    gallery: galleryData.length
+  });
 
   return (
     <main className="min-h-screen">
+      {/* Debug Info - Remove this after fixing the issue */}
+      <DebugInfo />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -94,7 +121,13 @@ const HomePage = async () => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-gray-500">Belum ada produk tersedia.</div>
+            <div className="text-center text-gray-500">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">🐟</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Belum Ada Produk</h3>
+              <p className="text-gray-600">Produk akan ditampilkan di sini</p>
+            </div>
           )}
         </div>
       </section>

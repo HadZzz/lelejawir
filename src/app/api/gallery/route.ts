@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { verifyJWT } from '@/utils/jwt';
 
 // GET /api/gallery - Get all gallery items
 export const GET = async () => {
@@ -21,30 +20,8 @@ export const GET = async () => {
 };
 
 // POST /api/gallery - Create new gallery item
-export const POST = async (request: NextRequest) => {
+export const POST = async (request: any) => {
   try {
-    const token = request.headers.get('authorization')?.replace('Bearer ', '');
-    
-    console.log('Gallery POST - Token:', token ? 'exists' : 'missing');
-    
-    if (!token) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-
-    const decoded = verifyJWT(token) as { role?: string };
-    console.log('Gallery POST - Decoded JWT:', decoded);
-    
-    if (!decoded || decoded.role !== 'admin') {
-      console.log('Gallery POST - Access denied. Role:', decoded?.role);
-      return NextResponse.json(
-        { error: 'Forbidden' },
-        { status: 403 }
-      );
-    }
-
     const body = await request.json();
     const { title, description, imageUrl, category } = body;
 

@@ -5,15 +5,15 @@ import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/components/ProductCard";
 import DebugInfo from "@/components/DebugInfo";
 
-// Fetch gallery data - using direct URL
+// Fetch gallery data
 async function getGalleryData(): Promise<Gallery[]> {
   try {
-    console.log('Fetching gallery data from fixed API...');
+    console.log('Fetching gallery data...');
     const baseUrl = process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000';
     
-    const response = await fetch(`${baseUrl}/api/gallery-fixed`, {
+    const response = await fetch(`${baseUrl}/api/gallery`, {
       cache: 'no-store',
     });
     
@@ -31,15 +31,15 @@ async function getGalleryData(): Promise<Gallery[]> {
   }
 }
 
-// Fetch product data - using simplest API
+// Fetch product data
 async function getProductData() {
   try {
-    console.log('Fetching product data from simple API...');
+    console.log('Fetching product data...');
     const baseUrl = process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000';
     
-    const response = await fetch(`${baseUrl}/api/products-simple-v2`, {
+    const response = await fetch(`${baseUrl}/api/products`, {
       cache: 'no-store',
     });
     

@@ -13,7 +13,7 @@ async function getGalleryData(): Promise<Gallery[]> {
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000';
     
-    const response = await fetch(`${baseUrl}/api/gallery`, {
+    const response = await fetch(`${baseUrl}/api/gallery-clean`, {
       cache: 'no-store',
     });
     
@@ -39,7 +39,7 @@ async function getProductData() {
       ? `https://${process.env.VERCEL_URL}` 
       : 'http://localhost:3000';
     
-    const response = await fetch(`${baseUrl}/api/products`, {
+    const response = await fetch(`${baseUrl}/api/products-clean`, {
       cache: 'no-store',
     });
     

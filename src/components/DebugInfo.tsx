@@ -25,7 +25,7 @@ const DebugInfo = () => {
         } else {
           setError('Failed to fetch debug info');
         }
-      } catch (err) {
+      } catch {
         setError('Error fetching debug info');
       } finally {
         setLoading(false);

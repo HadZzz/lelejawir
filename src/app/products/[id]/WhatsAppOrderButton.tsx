@@ -25,7 +25,7 @@ const WhatsAppOrderButton = ({ product }: WhatsAppOrderButtonProps) => {
       `- Deskripsi: ${product.description}%0A%0A` +
       `Mohon informasi lebih lanjut tentang pemesanan dan pengiriman. Terima kasih!`;
 
-    const whatsappUrl = `https://wa.me/085876120167?text=${message}`;
+    const whatsappUrl = `https://wa.me/6285876120167?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
 

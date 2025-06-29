@@ -4,17 +4,17 @@ import { Gallery } from "@/types/gallery";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/components/ProductCard";
 import DebugInfo from "@/components/DebugInfo";
-import { getApiUrl } from "@/utils/url";
 
-// Fetch gallery data - using fixed API with mock data
+// Fetch gallery data - using direct URL
 async function getGalleryData(): Promise<Gallery[]> {
   try {
     console.log('Fetching gallery data from fixed API...');
-    const response = await fetch(getApiUrl('/api/gallery-fixed'), {
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/api/gallery-fixed`, {
       cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     
     if (!response.ok) {
@@ -31,15 +31,16 @@ async function getGalleryData(): Promise<Gallery[]> {
   }
 }
 
-// Fetch product data - using fixed API with mock data
+// Fetch product data - using simplest API
 async function getProductData() {
   try {
-    console.log('Fetching product data from fixed API...');
-    const response = await fetch(getApiUrl('/api/products-fixed'), {
+    console.log('Fetching product data from simple API...');
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'http://localhost:3000';
+    
+    const response = await fetch(`${baseUrl}/api/products-simple-v2`, {
       cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     
     if (!response.ok) {

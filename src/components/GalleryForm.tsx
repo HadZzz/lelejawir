@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Gallery {
   id: string;
@@ -25,6 +26,9 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
     imageUrl: "",
     category: ""
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (gallery) {
@@ -34,6 +38,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
         imageUrl: gallery.imageUrl,
         category: gallery.category || ""
       });
+      setImagePreview(gallery.imageUrl);
     } else {
       setFormData({
         title: "",
@@ -41,12 +46,72 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
         imageUrl: "",
         category: ""
       });
+      setImagePreview("");
+      setSelectedFile(null);
     }
   }, [gallery, isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUpload = async (): Promise<string> => {
+    if (!selectedFile) {
+      return formData.imageUrl;
+    }
+
+    setIsUploading(true);
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append('file', selectedFile);
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formDataUpload,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      return data.imageUrl;
+    } catch (error) {
+      console.error('Upload error:', error);
+      throw new Error('Failed to upload image');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    
+    try {
+      let finalImageUrl = formData.imageUrl;
+      
+      if (selectedFile) {
+        finalImageUrl = await handleUpload();
+      }
+
+      onSubmit({
+        title: formData.title,
+        description: formData.description,
+        imageUrl: finalImageUrl,
+        category: formData.category
+      });
+    } catch (error) {
+      console.error('Submit error:', error);
+      alert('Failed to save gallery item. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -106,14 +171,28 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                URL Gambar *
+                Gambar Galeri
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Upload gambar atau gunakan URL di bawah
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                URL Gambar (opsional jika upload file)
               </label>
               <input
                 type="url"
                 name="imageUrl"
                 value={formData.imageUrl}
                 onChange={handleChange}
-                required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 placeholder="https://example.com/image.jpg"
               />
@@ -133,6 +212,22 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
               />
             </div>
 
+            {imagePreview && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Preview Gambar
+                </label>
+                <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                  <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="flex gap-3 pt-4">
               <button
                 type="button"
@@ -143,10 +238,10 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
               </button>
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || isUploading}
                 className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {isLoading ? (
+                {isLoading || isUploading ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                     Menyimpan...

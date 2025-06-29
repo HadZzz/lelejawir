@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import WhatsAppOrderButton from "./WhatsAppOrderButton";
 
 interface Product {
   id: string;
@@ -8,6 +9,8 @@ interface Product {
   description: string;
   price: number;
   imageUrl: string;
+  weight?: number;
+  fishType?: string;
 }
 
 const getProduct = async (id: string): Promise<Product | null> => {
@@ -82,6 +85,12 @@ const ProductDetailPage = async (context: { params: Promise<{ id: string }> }) =
                 <p className="text-gray-600 mb-8 leading-relaxed text-lg">
                   {product.description}
                 </p>
+                {product.weight && (
+                  <div className="text-base text-gray-500 mb-2">Berat: {product.weight} kg</div>
+                )}
+                {product.fishType && (
+                  <div className="text-base text-gray-500 mb-6">Jenis: {product.fishType}</div>
+                )}
                 
                 <div className="bg-blue-50 rounded-xl p-6 mb-8">
                   <div className="text-4xl font-bold text-blue-600 mb-2">
@@ -112,9 +121,7 @@ const ProductDetailPage = async (context: { params: Promise<{ id: string }> }) =
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-8 rounded-full font-bold text-lg hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300 shadow-lg">
-                    Hubungi untuk Pemesanan
-                  </button>
+                  <WhatsAppOrderButton product={product} />
                   <Link 
                     href="/contact"
                     className="flex-1 bg-transparent text-blue-600 py-4 px-8 rounded-full font-bold text-lg border-2 border-blue-600 hover:bg-blue-600 hover:text-white transform hover:scale-105 transition-all duration-300 text-center"

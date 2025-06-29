@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Gallery } from "@/types/gallery";
+import ProductCard from "@/components/ProductCard";
 
 // Fetch gallery data
 async function getGalleryData(): Promise<Gallery[]> {
@@ -19,8 +20,26 @@ async function getGalleryData(): Promise<Gallery[]> {
   }
 }
 
+// Fetch product data
+async function getProductData() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/products`, {
+      cache: 'no-store'
+    });
+    if (!response.ok) {
+      console.error('Failed to fetch product data');
+      return [];
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching product data:', error);
+    return [];
+  }
+}
+
 const HomePage = async () => {
   const galleryData = await getGalleryData();
+  const productData = await getProductData();
 
   return (
     <main className="min-h-screen">
@@ -55,6 +74,27 @@ const HomePage = async () => {
               Hubungi Kami
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Product Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Produk Lele Kami</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Pilih lele segar sesuai kebutuhan Anda
+            </p>
+          </div>
+          {productData.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {productData.map((product: any) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">Belum ada produk tersedia.</div>
+          )}
         </div>
       </section>
 

@@ -28,6 +28,8 @@ model Product {
   imageUrl    String?
   stock       Int      @default(0)
   category    String?
+  weight      Float?   // Berat dalam kg
+  fishType    String?  // Jenis lele (Sangkuriang, Dumbo, dll)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

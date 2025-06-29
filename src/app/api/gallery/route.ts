@@ -26,6 +26,8 @@ export const POST = async (request: NextRequest) => {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');
     
+    console.log('Gallery POST - Token:', token ? 'exists' : 'missing');
+    
     if (!token) {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -34,7 +36,10 @@ export const POST = async (request: NextRequest) => {
     }
 
     const decoded = verifyJWT(token) as { role?: string };
+    console.log('Gallery POST - Decoded JWT:', decoded);
+    
     if (!decoded || decoded.role !== 'admin') {
+      console.log('Gallery POST - Access denied. Role:', decoded?.role);
       return NextResponse.json(
         { error: 'Forbidden' },
         { status: 403 }

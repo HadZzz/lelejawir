@@ -50,3 +50,7 @@ prisma/migrations/
 
 # VSCode
 .vscode/
+
+# Uploaded files
+/public/uploads/*
+!public/uploads/.gitkeep

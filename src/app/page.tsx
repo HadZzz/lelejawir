@@ -6,11 +6,11 @@ import type { Product } from "@/components/ProductCard";
 import DebugInfo from "@/components/DebugInfo";
 import { getApiUrl } from "@/utils/url";
 
-// Fetch gallery data
+// Fetch gallery data - using fixed API with mock data
 async function getGalleryData(): Promise<Gallery[]> {
   try {
-    console.log('Fetching gallery data...');
-    const response = await fetch(getApiUrl('/api/gallery'), {
+    console.log('Fetching gallery data from fixed API...');
+    const response = await fetch(getApiUrl('/api/gallery-fixed'), {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
@@ -31,11 +31,11 @@ async function getGalleryData(): Promise<Gallery[]> {
   }
 }
 
-// Fetch product data - temporarily using simple API
+// Fetch product data - using fixed API with mock data
 async function getProductData() {
   try {
-    console.log('Fetching product data...');
-    const response = await fetch(getApiUrl('/api/products-simple'), {
+    console.log('Fetching product data from fixed API...');
+    const response = await fetch(getApiUrl('/api/products-fixed'), {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

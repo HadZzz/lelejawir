@@ -1,13 +1,9 @@
 import Link from "next/link";
-import DebugInfo from "@/components/DebugInfo";
 import ClientDataFetcher from "@/components/ClientDataFetcher";
 
 const HomePage = () => {
   return (
     <main className="min-h-screen">
-      {/* Debug Info - Remove this after fixing the issue */}
-      <DebugInfo />
-      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-24 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>

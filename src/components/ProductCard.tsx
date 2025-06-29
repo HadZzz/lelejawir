@@ -19,16 +19,8 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const handleWhatsAppOrder = () => {
-    const phoneNumber = "085876120167";
-    const message = `Halo! Saya ingin memesan ${product.name} dengan detail:
-    
-Nama Produk: ${product.name}
-Harga: Rp ${product.price.toLocaleString()}
-${product.weight ? `Berat: ${product.weight} kg` : ''}
-${product.fishType ? `Jenis: ${product.fishType}` : ''}
-
-Apakah masih tersedia? Terima kasih!`;
-
+    const phoneNumber = "6285876120167";
+    const message = `Halo! Saya ingin memesan ${product.name} dengan detail:\n\nNama Produk: ${product.name}\nHarga: Rp ${product.price.toLocaleString()}\n${product.weight ? `Berat: ${product.weight} kg` : ''}\n${product.fishType ? `Jenis: ${product.fishType}` : ''}\n\nApakah masih tersedia? Terima kasih!`;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };

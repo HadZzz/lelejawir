@@ -4,12 +4,13 @@ import { Gallery } from "@/types/gallery";
 import ProductCard from "@/components/ProductCard";
 import type { Product } from "@/components/ProductCard";
 import DebugInfo from "@/components/DebugInfo";
+import { getApiUrl } from "@/utils/url";
 
 // Fetch gallery data
 async function getGalleryData(): Promise<Gallery[]> {
   try {
     console.log('Fetching gallery data...');
-    const response = await fetch('/api/gallery', {
+    const response = await fetch(getApiUrl('/api/gallery'), {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ async function getGalleryData(): Promise<Gallery[]> {
 async function getProductData() {
   try {
     console.log('Fetching product data...');
-    const response = await fetch('/api/products', {
+    const response = await fetch(getApiUrl('/api/products'), {
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',

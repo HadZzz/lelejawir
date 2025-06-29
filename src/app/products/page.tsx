@@ -1,4 +1,5 @@
 import ProductCard from "@/components/ProductCard";
+import { getApiUrl } from "@/utils/url";
 
 interface Product {
   id: string;
@@ -10,7 +11,7 @@ interface Product {
 
 const getProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/products`, {
+    const response = await fetch(getApiUrl('/api/products'), {
       cache: 'no-store'
     });
     if (!response.ok) throw new Error('Failed to fetch products');

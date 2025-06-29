@@ -17,22 +17,22 @@ const ClientDataFetcher = () => {
       try {
         setLoading(true);
         
-        // Fetch products
-        const productsResponse = await fetch('/api/test-products');
+        // Fetch products from database
+        const productsResponse = await fetch('/api/products');
         if (productsResponse.ok) {
           const productsData = await productsResponse.json();
           setProducts(productsData);
-          console.log('Products loaded:', productsData.length);
+          console.log('Products loaded from database:', productsData.length);
         } else {
           console.error('Failed to fetch products:', productsResponse.status);
         }
         
-        // Fetch gallery
-        const galleryResponse = await fetch('/api/test-gallery');
+        // Fetch gallery from database
+        const galleryResponse = await fetch('/api/gallery');
         if (galleryResponse.ok) {
           const galleryData = await galleryResponse.json();
           setGallery(galleryData);
-          console.log('Gallery loaded:', galleryData.length);
+          console.log('Gallery loaded from database:', galleryData.length);
         } else {
           console.error('Failed to fetch gallery:', galleryResponse.status);
         }

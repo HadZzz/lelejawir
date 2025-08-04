@@ -15,38 +15,38 @@ const HomePage = () => {
         </div>
         
         {/* Logo Politama - Left Side */}
-        <div className="absolute left-8 top-1/2 transform -translate-y-1/2 hidden lg:block group">
-          <div className="relative p-4 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
+        <div className="absolute left-2 sm:left-4 lg:left-8 top-1/2 transform -translate-y-1/2 group">
+          <div className="relative p-2 sm:p-3 lg:p-4 bg-white/10 backdrop-blur-sm rounded-xl lg:rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
             <Image
               src="/politama-removebg-preview.png"
               alt="Logo Politama"
-              width={96}
-              height={96}
-              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              width={64}
+              height={64}
+              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
             />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 rounded-xl lg:rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
+          <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
               Partner Politama
             </div>
           </div>
         </div>
         
         {/* Logo Kemendistrik - Right Side */}
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden lg:block group">
-          <div className="relative p-4 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
+        <div className="absolute right-2 sm:right-4 lg:right-8 top-1/2 transform -translate-y-1/2 group">
+          <div className="relative p-2 sm:p-3 lg:p-4 bg-white/10 backdrop-blur-sm rounded-xl lg:rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
             <Image
               src="/kemendistrik-removebg-preview.png"
               alt="Logo Kemendistrik"
-              width={96}
-              height={96}
-              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              width={64}
+              height={64}
+              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
             />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 rounded-xl lg:rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
+          <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
               Kemendistrik
             </div>
           </div>

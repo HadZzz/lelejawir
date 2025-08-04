@@ -71,16 +71,23 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link 
-              href="/products" 
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200" 
+            <Link
+              href="/products"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
               aria-label="Produk"
             >
               Produk
             </Link>
-            <Link 
-              href="/contact" 
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200" 
+            <Link
+              href="/blog"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+              aria-label="Blog"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
               aria-label="Kontak"
             >
               Kontak
@@ -124,17 +131,25 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              <Link 
-                href="/products" 
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1" 
+              <Link
+                href="/products"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1"
                 onClick={handleCloseMenu}
                 aria-label="Produk"
               >
                 Produk
               </Link>
-              <Link 
-                href="/contact" 
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1" 
+              <Link
+                href="/blog"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1"
+                onClick={handleCloseMenu}
+                aria-label="Blog"
+              >
+                Blog
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 px-2 py-1"
                 onClick={handleCloseMenu}
                 aria-label="Kontak"
               >

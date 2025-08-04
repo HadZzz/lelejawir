@@ -14,41 +14,61 @@ const HomePage = () => {
           <div className="absolute bottom-20 left-20 w-12 h-12 bg-white opacity-10 rounded-full animate-pulse delay-2000"></div>
         </div>
         
-        {/* Logo Politama - Left Side */}
-        <div className="absolute left-2 sm:left-4 lg:left-8 top-1/2 transform -translate-y-1/2 group">
-          <div className="relative p-2 sm:p-3 lg:p-4 bg-white/10 backdrop-blur-sm rounded-xl lg:rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
-            <Image
-              src="/politama-removebg-preview.png"
-              alt="Logo Politama"
-              width={64}
-              height={64}
-              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
-            />
-            <div className="absolute inset-0 rounded-xl lg:rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-          <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
-              Partner Politama
+        {/* Logo Politama - Bottom Left */}
+        <div className="absolute bottom-4 left-4 sm:left-8 lg:left-12 group">
+          <div className="relative bg-white/15 backdrop-blur-md rounded-2xl border-2 border-white/30 hover:border-white/50 hover:bg-white/25 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-white/30 overflow-hidden">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-blue-200/20"></div>
+            
+            {/* Logo Container */}
+            <div className="relative p-3 sm:p-4 lg:p-5">
+              <Image
+                src="/politama-removebg-preview.png"
+                alt="Logo Politama"
+                width={80}
+                height={80}
+                className="object-contain opacity-95 group-hover:opacity-100 transition-all duration-500 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto"
+              />
             </div>
+            
+            {/* Floating Badge */}
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full px-2 sm:px-3 py-1 text-xs font-bold shadow-lg border border-white/20 whitespace-nowrap">
+                🤝 Partner Resmi
+              </div>
+            </div>
+            
+            {/* Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
           </div>
         </div>
         
-        {/* Logo Kemendistrik - Right Side */}
-        <div className="absolute right-2 sm:right-4 lg:right-8 top-1/2 transform -translate-y-1/2 group">
-          <div className="relative p-2 sm:p-3 lg:p-4 bg-white/10 backdrop-blur-sm rounded-xl lg:rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
-            <Image
-              src="/kemendistrik-removebg-preview.png"
-              alt="Logo Kemendistrik"
-              width={64}
-              height={64}
-              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
-            />
-            <div className="absolute inset-0 rounded-xl lg:rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </div>
-          <div className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
-              Kemendistrik
+        {/* Logo Kemendistrik - Bottom Right */}
+        <div className="absolute bottom-4 right-4 sm:right-8 lg:right-12 group">
+          <div className="relative bg-white/15 backdrop-blur-md rounded-2xl border-2 border-white/30 hover:border-white/50 hover:bg-white/25 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-white/30 overflow-hidden">
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-bl from-white/10 via-transparent to-green-200/20"></div>
+            
+            {/* Logo Container */}
+            <div className="relative p-3 sm:p-4 lg:p-5">
+              <Image
+                src="/kemendistrik-removebg-preview.png"
+                alt="Logo Kemendistrik"
+                width={80}
+                height={80}
+                className="object-contain opacity-95 group-hover:opacity-100 transition-all duration-500 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto"
+              />
             </div>
+            
+            {/* Floating Badge */}
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
+              <div className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full px-2 sm:px-3 py-1 text-xs font-bold shadow-lg border border-white/20 whitespace-nowrap">
+                🏛️ Kemendistrik
+              </div>
+            </div>
+            
+            {/* Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
           </div>
         </div>
         

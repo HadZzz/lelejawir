@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export interface Product {
   id: string;
@@ -18,6 +19,8 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const [imageError, setImageError] = useState(false);
+
   const handleWhatsAppOrder = () => {
     const phoneNumber = "6285876120167";
     const message = `Halo! Saya ingin memesan ${product.name} dengan detail:\n\nNama Produk: ${product.name}\nHarga: Rp ${product.price.toLocaleString()}\n${product.weight ? `Berat: ${product.weight} kg` : ''}\n${product.fishType ? `Jenis: ${product.fishType}` : ''}\n\nApakah masih tersedia? Terima kasih!`;
@@ -28,13 +31,25 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       <div className="aspect-square bg-gray-200 relative overflow-hidden">
-        <Image 
-          src={product.imageUrl} 
-          alt={product.name}
-          width={400}
-          height={400}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-        />
+        {!imageError ? (
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            width={400}
+            height={400}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            onError={() => setImageError(true)}
+            unoptimized={product.imageUrl.startsWith('http')}
+            priority={false}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+            <div className="text-center">
+              <span className="text-6xl mb-2 block">🐟</span>
+              <p className="text-blue-600 font-semibold text-sm">Gambar Produk</p>
+            </div>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute top-4 right-4">
           <span className="bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-bold">

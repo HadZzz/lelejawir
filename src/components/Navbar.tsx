@@ -18,8 +18,48 @@ const Navbar = () => {
     <nav className="w-full bg-white shadow-lg sticky top-0 z-50 border-b">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold tracking-tight text-blue-700 hover:text-blue-800 transition-colors" aria-label="Home">
-            🐟 Penjualan Lele
+          <Link href="/" className="flex items-center space-x-3 text-2xl font-bold tracking-tight text-blue-700 hover:text-blue-800 transition-colors" aria-label="Home">
+            <div className="w-10 h-10 relative">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-full h-full text-blue-600 hover:text-blue-700 transition-colors"
+                fill="currentColor"
+              >
+                {/* Catfish body */}
+                <ellipse cx="45" cy="50" rx="35" ry="15" className="fill-blue-600"/>
+                
+                {/* Catfish head */}
+                <ellipse cx="25" cy="50" rx="18" ry="12" className="fill-blue-700"/>
+                
+                {/* Catfish tail */}
+                <path d="M80 50 L95 40 L95 45 L88 50 L95 55 L95 60 Z" className="fill-blue-500"/>
+                
+                {/* Top fin */}
+                <path d="M40 35 L50 25 L60 35 L55 40 L45 40 Z" className="fill-blue-500"/>
+                
+                {/* Bottom fin */}
+                <path d="M40 65 L50 75 L60 65 L55 60 L45 60 Z" className="fill-blue-500"/>
+                
+                {/* Side fins */}
+                <ellipse cx="35" cy="42" rx="8" ry="4" className="fill-blue-500" transform="rotate(-20 35 42)"/>
+                <ellipse cx="35" cy="58" rx="8" ry="4" className="fill-blue-500" transform="rotate(20 35 58)"/>
+                
+                {/* Whiskers (barbels) - characteristic of catfish */}
+                <line x1="15" y1="48" x2="8" y2="45" stroke="currentColor" strokeWidth="2" className="stroke-blue-800"/>
+                <line x1="15" y1="52" x2="8" y2="55" stroke="currentColor" strokeWidth="2" className="stroke-blue-800"/>
+                <line x1="18" y1="46" x2="12" y2="42" stroke="currentColor" strokeWidth="1.5" className="stroke-blue-700"/>
+                <line x1="18" y1="54" x2="12" y2="58" stroke="currentColor" strokeWidth="1.5" className="stroke-blue-700"/>
+                
+                {/* Eye */}
+                <circle cx="22" cy="48" r="3" className="fill-white"/>
+                <circle cx="23" cy="47" r="2" className="fill-blue-900"/>
+                <circle cx="23.5" cy="46.5" r="0.8" className="fill-white"/>
+                
+                {/* Mouth */}
+                <ellipse cx="12" cy="52" rx="3" ry="1.5" className="fill-blue-900"/>
+              </svg>
+            </div>
+            <span>Penjualan Lele</span>
           </Link>
           
           {/* Desktop Menu */}

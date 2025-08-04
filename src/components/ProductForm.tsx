@@ -33,6 +33,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string>("");
 
   useEffect(() => {
     if (product) {
@@ -77,6 +78,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
     }
 
     setIsUploading(true);
+    setUploadError("");
     try {
       const formDataUpload = new FormData();
       formDataUpload.append('file', selectedFile);
@@ -87,14 +89,20 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Upload failed');
       }
 
       const data = await response.json();
+      if (!data.success || !data.imageUrl) {
+        throw new Error('Invalid response from upload service');
+      }
       return data.imageUrl;
     } catch (error) {
       console.error('Upload error:', error);
-      throw new Error('Failed to upload image');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload image';
+      setUploadError(errorMessage);
+      throw new Error(errorMessage);
     } finally {
       setIsUploading(false);
     }
@@ -103,11 +111,27 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate required fields
+    if (!formData.name || !formData.description || !formData.price) {
+      alert('Mohon isi semua field yang wajib diisi');
+      return;
+    }
+
+    if (!formData.imageUrl && !selectedFile) {
+      alert('Mohon upload gambar atau masukkan URL gambar');
+      return;
+    }
+    
     try {
       let finalImageUrl = formData.imageUrl;
       
       if (selectedFile) {
         finalImageUrl = await handleUpload();
+      }
+
+      if (!finalImageUrl) {
+        alert('Gambar diperlukan untuk produk');
+        return;
       }
 
       onSubmit({
@@ -120,7 +144,8 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
       });
     } catch (error) {
       console.error('Submit error:', error);
-      alert('Failed to save product. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save product';
+      alert(`Gagal menyimpan produk: ${errorMessage}`);
     }
   };
 
@@ -150,7 +175,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               required
             />
           </div>
@@ -164,7 +189,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               required
             />
           </div>
@@ -178,7 +203,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               name="price"
               value={formData.price}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               required
             />
           </div>
@@ -191,11 +216,16 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               type="file"
               accept="image/*"
               onChange={handleFileChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
             />
             <p className="text-xs text-gray-500 mt-1">
               Upload gambar atau gunakan URL di bawah
             </p>
+            {uploadError && (
+              <p className="text-xs text-red-500 mt-1">
+                Error: {uploadError}
+              </p>
+            )}
           </div>
 
           <div>
@@ -207,7 +237,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               name="imageUrl"
               value={formData.imageUrl}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
               placeholder="https://example.com/image.jpg"
             />
           </div>
@@ -223,7 +253,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               onChange={handleChange}
               step="0.01"
               min="0"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
               placeholder="Contoh: 1.2"
             />
           </div>
@@ -237,7 +267,7 @@ const ProductForm = ({ product, isOpen, onClose, onSubmit, isLoading = false }: 
               name="fishType"
               value={formData.fishType}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
               placeholder="Contoh: Sangkuriang, Dumbo, Lokal"
               autoComplete="off"
             />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import ClientDataFetcher from "@/components/ClientDataFetcher";
 
 const HomePage = () => {
@@ -12,6 +13,45 @@ const HomePage = () => {
           <div className="absolute top-40 right-20 w-16 h-16 bg-white opacity-10 rounded-full animate-pulse delay-1000"></div>
           <div className="absolute bottom-20 left-20 w-12 h-12 bg-white opacity-10 rounded-full animate-pulse delay-2000"></div>
         </div>
+        
+        {/* Logo Politama - Left Side */}
+        <div className="absolute left-8 top-1/2 transform -translate-y-1/2 hidden lg:block group">
+          <div className="relative p-4 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
+            <Image
+              src="/politama-removebg-preview.png"
+              alt="Logo Politama"
+              width={96}
+              height={96}
+              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
+              Partner Politama
+            </div>
+          </div>
+        </div>
+        
+        {/* Logo Kemendistrik - Right Side */}
+        <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden lg:block group">
+          <div className="relative p-4 bg-white/10 backdrop-blur-sm rounded-2xl border-2 border-white/20 hover:border-white/40 hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-white/20">
+            <Image
+              src="/kemendistrik-removebg-preview.png"
+              alt="Logo Kemendistrik"
+              width={96}
+              height={96}
+              className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 text-xs font-semibold text-blue-700 whitespace-nowrap">
+              Kemendistrik
+            </div>
+          </div>
+        </div>
+        
         <div className="relative max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Lele Segar
@@ -65,18 +105,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Product Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Produk Lele Kami</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Pilih lele segar sesuai kebutuhan Anda
-            </p>
-          </div>
-          {/* Product data will be populated here */}
-        </div>
-      </section>
 
       {/* About Us Section */}
       <section className="py-20 px-4 bg-gray-50">
@@ -121,8 +149,22 @@ const HomePage = () => {
               </div>
             </div>
             <div className="bg-white rounded-2xl shadow-xl p-8">
-              <div className="aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center">
-                <span className="text-8xl">🐟</span>
+              <div className="aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src="/politama-removebg-preview.png"
+                    alt="Logo Politama - Partner Kami"
+                    width={200}
+                    height={200}
+                    className="object-contain opacity-80"
+                  />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center">
+                      <p className="text-sm font-semibold text-blue-700">Partner Resmi</p>
+                      <p className="text-xs text-gray-600">Politama</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -139,50 +181,43 @@ const HomePage = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🐟</span>
+            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors duration-300">
+                <svg className="w-10 h-10 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Segar Langsung</h3>
               <p className="text-gray-600 leading-relaxed">
-                Lele segar langsung dari kolam, tidak melalui tengkulak. 
+                Lele segar langsung dari kolam, tidak melalui tengkulak.
                 Dipanen sesuai pesanan untuk menjamin kesegaran.
               </p>
             </div>
-            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🌱</span>
+            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-200 transition-colors duration-300">
+                <svg className="w-10 h-10 text-green-600 group-hover:text-green-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Berkualitas Tinggi</h3>
               <p className="text-gray-600 leading-relaxed">
-                Dibudidayakan dengan pakan berkualitas tinggi dan perawatan yang teliti. 
+                Dibudidayakan dengan pakan berkualitas tinggi dan perawatan yang teliti.
                 Hasil lele yang sehat dan bergizi.
               </p>
             </div>
-            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🚚</span>
+            <div className="text-center p-8 bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors duration-300">
+                <svg className="w-10 h-10 text-orange-600 group-hover:text-orange-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                </svg>
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Pengiriman Cepat</h3>
               <p className="text-gray-600 leading-relaxed">
-                Pengiriman cepat ke seluruh Ngawi dan sekitarnya. 
+                Pengiriman cepat ke seluruh Ngawi dan sekitarnya.
                 Pesanan Anda akan sampai dalam waktu singkat.
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Galeri Kolam Kami</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Lihat langsung kondisi kolam dan proses budidaya lele kami
-            </p>
-          </div>
-          {/* Gallery data will be populated here */}
         </div>
       </section>
 
@@ -197,8 +232,10 @@ const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👤</span>
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">BS</span>
+                </div>
               </div>
               <p className="text-gray-600 mb-4 italic">
                 &quot;Lele yang sangat segar dan berkualitas. Pengiriman cepat dan pelayanan ramah. Sudah langganan 2 tahun!&quot;
@@ -207,8 +244,10 @@ const HomePage = () => {
               <div className="text-sm text-gray-500">Warung Makan Sederhana</div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👤</span>
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">SA</span>
+                </div>
               </div>
               <p className="text-gray-600 mb-4 italic">
                 &quot;Kualitas lele yang konsisten dan harga yang terjangkau. Pelanggan saya sangat puas dengan hasilnya.&quot;
@@ -217,8 +256,10 @@ const HomePage = () => {
               <div className="text-sm text-gray-500">Catering Keluarga</div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">👤</span>
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">AR</span>
+                </div>
               </div>
               <p className="text-gray-600 mb-4 italic">
                 &quot;Pengiriman tepat waktu dan lele selalu segar. Sudah menjadi supplier tetap untuk restoran kami.&quot;

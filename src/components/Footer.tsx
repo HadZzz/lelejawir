@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => (
   <footer className="w-full bg-gray-900 text-white py-12">
@@ -6,11 +7,65 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Company Info */}
         <div className="col-span-1 md:col-span-2">
-          <h3 className="text-2xl font-bold mb-4">🐟 Penjualan Lele Ngawi</h3>
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-8 h-8 relative">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-full h-full text-white hover:text-yellow-300 transition-colors"
+                fill="currentColor"
+              >
+                {/* Catfish body */}
+                <ellipse cx="45" cy="50" rx="35" ry="15" className="fill-current"/>
+                
+                {/* Catfish head */}
+                <ellipse cx="25" cy="50" rx="18" ry="12" className="fill-current opacity-90"/>
+                
+                {/* Catfish tail */}
+                <path d="M80 50 L95 40 L95 45 L88 50 L95 55 L95 60 Z" className="fill-current opacity-80"/>
+                
+                {/* Top fin */}
+                <path d="M40 35 L50 25 L60 35 L55 40 L45 40 Z" className="fill-current opacity-80"/>
+                
+                {/* Bottom fin */}
+                <path d="M40 65 L50 75 L60 65 L55 60 L45 60 Z" className="fill-current opacity-80"/>
+                
+                {/* Side fins */}
+                <ellipse cx="35" cy="42" rx="8" ry="4" className="fill-current opacity-80" transform="rotate(-20 35 42)"/>
+                <ellipse cx="35" cy="58" rx="8" ry="4" className="fill-current opacity-80" transform="rotate(20 35 58)"/>
+                
+                {/* Whiskers (barbels) */}
+                <line x1="15" y1="48" x2="8" y2="45" stroke="currentColor" strokeWidth="2" className="stroke-current"/>
+                <line x1="15" y1="52" x2="8" y2="55" stroke="currentColor" strokeWidth="2" className="stroke-current"/>
+                <line x1="18" y1="46" x2="12" y2="42" stroke="currentColor" strokeWidth="1.5" className="stroke-current opacity-80"/>
+                <line x1="18" y1="54" x2="12" y2="58" stroke="currentColor" strokeWidth="1.5" className="stroke-current opacity-80"/>
+                
+                {/* Eye */}
+                <circle cx="22" cy="48" r="3" className="fill-gray-800"/>
+                <circle cx="23" cy="47" r="2" className="fill-gray-900"/>
+                <circle cx="23.5" cy="46.5" r="0.8" className="fill-white"/>
+                
+                {/* Mouth */}
+                <ellipse cx="12" cy="52" rx="3" ry="1.5" className="fill-gray-800"/>
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold">Penjualan Lele Gumpang</h3>
+          </div>
           <p className="text-gray-300 mb-4 max-w-md">
-            Penyedia lele segar berkualitas tinggi langsung dari kolam kami. 
-            Melayani pengiriman ke seluruh Ngawi dan sekitarnya.
+            Penyedia lele segar berkualitas tinggi langsung dari kolam kami.
+            Melayani pengiriman ke seluruh Gumpang, Surakarta dan sekitarnya.
           </p>
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="w-6 h-6 relative">
+              <Image
+                src="/politama-removebg-preview.png"
+                alt="Logo Politama"
+                width={24}
+                height={24}
+                className="object-contain"
+              />
+            </div>
+            <span className="text-gray-400 text-sm">Didukung oleh Politama</span>
+          </div>
           <div className="flex space-x-4">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -45,16 +100,16 @@ const Footer = () => (
         <div>
           <h4 className="text-lg font-semibold mb-4">Kontak</h4>
           <ul className="space-y-2 text-gray-300">
-            <li>Jl. Contoh No. 123, Ngawi</li>
+            <li>Gumpang, Surakarta</li>
             <li>0812-3456-7890</li>
-            <li>info@lele-ngawi.com</li>
+            <li>info@lele-gumpang.com</li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
         <p className="text-gray-400 text-sm">
-          &copy; {new Date().getFullYear()} Penjualan Lele Ngawi. All rights reserved.
+          &copy; {new Date().getFullYear()} Penjualan Lele Gumpang. All rights reserved.
         </p>
         <p className="text-gray-400 text-sm mt-2 md:mt-0">
           Dibuat dengan ❤️ menggunakan Next.js & TailwindCSS

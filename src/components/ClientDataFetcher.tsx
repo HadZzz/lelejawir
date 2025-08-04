@@ -76,8 +76,11 @@ const ClientDataFetcher = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Produk Lele Kami</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Pilih lele segar sesuai kebutuhan Anda
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-2">
+              Pilih lele segar berkualitas sesuai kebutuhan Anda
+            </p>
+            <p className="text-lg text-blue-600 font-semibold">
+              UMKM Lele Gumpang Surakarta
             </p>
           </div>
           {products.length > 0 ? (
@@ -118,6 +121,22 @@ const ClientDataFetcher = () => {
                       width={400}
                       height={400}
                       className="w-full h-full object-cover"
+                      unoptimized={item.imageUrl.startsWith('http')}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+                              <div class="text-center">
+                                <span class="text-6xl mb-2 block">🐟</span>
+                                <p class="text-blue-600 font-semibold text-sm">Gambar Galeri</p>
+                              </div>
+                            </div>
+                          `;
+                        }
+                      }}
                     />
                   </div>
                   <div className="p-4">

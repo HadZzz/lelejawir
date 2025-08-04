@@ -54,6 +54,22 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Validate file size (5MB = 5 * 1024 * 1024 bytes)
+      const maxSize = 5 * 1024 * 1024;
+      if (file.size > maxSize) {
+        alert('File terlalu besar. Ukuran maksimal adalah 5MB.');
+        e.target.value = ''; // Clear the input
+        return;
+      }
+
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Tipe file tidak didukung. Gunakan JPEG, PNG, WebP, atau GIF.');
+        e.target.value = ''; // Clear the input
+        return;
+      }
+
       setSelectedFile(file);
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -79,14 +95,19 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
       });
 
       if (!response.ok) {
-        throw new Error('Upload failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Upload failed');
       }
 
       const data = await response.json();
+      if (!data.success || !data.imageUrl) {
+        throw new Error('Invalid response from upload service');
+      }
       return data.imageUrl;
     } catch (error) {
       console.error('Upload error:', error);
-      throw new Error('Failed to upload image');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload image';
+      throw new Error(errorMessage);
     } finally {
       setIsUploading(false);
     }
@@ -95,11 +116,27 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate required fields
+    if (!formData.title) {
+      alert('Mohon isi judul galeri');
+      return;
+    }
+
+    if (!formData.imageUrl && !selectedFile) {
+      alert('Mohon upload gambar atau masukkan URL gambar');
+      return;
+    }
+    
     try {
       let finalImageUrl = formData.imageUrl;
       
       if (selectedFile) {
         finalImageUrl = await handleUpload();
+      }
+
+      if (!finalImageUrl) {
+        alert('Gambar diperlukan untuk galeri');
+        return;
       }
 
       onSubmit({
@@ -110,7 +147,8 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
       });
     } catch (error) {
       console.error('Submit error:', error);
-      alert('Failed to save gallery item. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to save gallery item';
+      alert(`Gagal menyimpan galeri: ${errorMessage}`);
     }
   };
 
@@ -150,7 +188,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
                 value={formData.title}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 bg-white placeholder-gray-500"
                 placeholder="Masukkan judul galeri"
               />
             </div>
@@ -164,7 +202,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
                 value={formData.description}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-gray-900 bg-white placeholder-gray-500"
                 placeholder="Masukkan deskripsi (opsional)"
               />
             </div>
@@ -177,7 +215,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 bg-white"
               />
               <p className="text-xs text-gray-500 mt-1">
                 Upload gambar atau gunakan URL di bawah
@@ -193,7 +231,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
                 name="imageUrl"
                 value={formData.imageUrl}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 bg-white placeholder-gray-500"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
@@ -207,7 +245,7 @@ const GalleryForm = ({ gallery, isOpen, onClose, onSubmit, isLoading }: GalleryF
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900 bg-white placeholder-gray-500"
                 placeholder="Contoh: Kolam, Proses, Hasil"
               />
             </div>

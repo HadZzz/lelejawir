@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kontak UMKM Lele Gumpang Surakarta",
     description: "Hubungi kami untuk pemesanan lele segar berkualitas tinggi dari Gumpang, Surakarta",
-    url: "https://lelejawir.vercel.app/contact",
+    url: "https://umkmlelegumpang.vercel.app/contact",
     images: ["/politama-removebg-preview.png"],
   },
   alternates: {
-    canonical: "https://lelejawir.vercel.app/contact",
+    canonical: "https://umkmlelegumpang.vercel.app/contact",
   },
 };
 

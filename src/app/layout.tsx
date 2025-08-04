@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lelejawir.vercel.app'),
+  metadataBase: new URL('https://umkmlelegumpang.vercel.app'),
   title: "UMKM Lele Gumpang Surakarta | Penjualan Lele Segar Berkualitas Tinggi",
   description: "UMKM Lele Gumpang Surakarta menyediakan lele segar berkualitas tinggi langsung dari kolam. Melayani pengiriman ke seluruh Gumpang, Surakarta dan sekitarnya. Harga terjangkau, kualitas terjamin.",
   keywords: "UMKM Lele Gumpang, lele segar Surakarta, jual lele Gumpang, ikan lele berkualitas, penjualan lele Surakarta, lele segar Gumpang, UMKM ikan lele, budidaya lele Surakarta",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://lelejawir.vercel.app",
+    url: "https://umkmlelegumpang.vercel.app",
     siteName: "UMKM Lele Gumpang Surakarta",
     title: "UMKM Lele Gumpang Surakarta | Penjualan Lele Segar Berkualitas Tinggi",
     description: "UMKM Lele Gumpang Surakarta menyediakan lele segar berkualitas tinggi langsung dari kolam. Melayani pengiriman ke seluruh Gumpang, Surakarta dan sekitarnya.",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     google: "5mAM5b2AU2ijdyRFKokDSX1NQ6b22MibtjoO2wRlsR8",
   },
   alternates: {
-    canonical: "https://lelejawir.vercel.app",
+    canonical: "https://umkmlelegumpang.vercel.app",
   },
 };
 

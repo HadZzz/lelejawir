@@ -8,32 +8,32 @@
   
   <!-- Homepage - Highest Priority -->
   <url>
-    <loc>https://lelejawir.vercel.app/</loc>
-    <lastmod>2025-01-04T08:58:00+00:00</lastmod>
+    <loc>https://umkmlelegumpang.vercel.app/</loc>
+    <lastmod>2025-08-04T09:34:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Products Page -->
   <url>
-    <loc>https://lelejawir.vercel.app/products</loc>
-    <lastmod>2025-01-04T08:58:00+00:00</lastmod>
+    <loc>https://umkmlelegumpang.vercel.app/products</loc>
+    <lastmod>2025-08-04T09:34:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Contact Page -->
   <url>
-    <loc>https://lelejawir.vercel.app/contact</loc>
-    <lastmod>2025-01-04T08:58:00+00:00</lastmod>
+    <loc>https://umkmlelegumpang.vercel.app/contact</loc>
+    <lastmod>2025-08-04T09:34:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Admin Page -->
   <url>
-    <loc>https://lelejawir.vercel.app/admin</loc>
-    <lastmod>2025-01-04T08:58:00+00:00</lastmod>
+    <loc>https://umkmlelegumpang.vercel.app/admin</loc>
+    <lastmod>2025-08-04T09:34:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

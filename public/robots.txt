@@ -1,5 +1,5 @@
 # robots.txt for UMKM Lele Gumpang Surakarta
-# https://lelejawir.vercel.app/robots.txt
+# https://umkmlelegumpang.vercel.app/robots.txt
 
 User-agent: *
 Allow: /
@@ -17,7 +17,7 @@ Disallow: /_next/
 Disallow: /uploads/
 
 # Sitemap location
-Sitemap: https://lelejawir.vercel.app/sitemap.xml
+Sitemap: https://umkmlelegumpang.vercel.app/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

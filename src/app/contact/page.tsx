@@ -37,10 +37,10 @@ const ContactPage = () => {
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Hubungi Kami
+            Hubungi UMKM Lele Gumpang Surakarta
           </h1>
           <p className="text-xl opacity-90 max-w-2xl mx-auto">
-            Siap melayani pesanan dan pertanyaan Anda
+            UMKM Lele Gumpang siap melayani pesanan dan pertanyaan Anda tentang lele segar berkualitas tinggi
           </p>
         </div>
       </section>
@@ -51,7 +51,7 @@ const ContactPage = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h2>
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan ke UMKM Lele Gumpang</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -119,7 +119,7 @@ const ContactPage = () => {
             {/* Contact Info */}
             <div className="space-y-8">
               <div className="bg-white rounded-2xl shadow-xl p-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Informasi Kontak</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">Informasi Kontak UMKM Lele Gumpang</h2>
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
@@ -129,8 +129,8 @@ const ContactPage = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Alamat</h3>
-                      <p className="text-gray-600">Jl. Contoh No. 123, Ngawi, Jawa Timur 63211</p>
+                      <h3 className="font-semibold text-gray-800 mb-1">Alamat UMKM Lele Gumpang</h3>
+                      <p className="text-gray-600">Gumpang, Surakarta, Jawa Tengah</p>
                     </div>
                   </div>
                   
@@ -141,7 +141,7 @@ const ContactPage = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">WhatsApp</h3>
+                      <h3 className="font-semibold text-gray-800 mb-1">WhatsApp UMKM Lele Gumpang</h3>
                       <p className="text-gray-600">0812-3456-7890</p>
                     </div>
                   </div>
@@ -153,8 +153,8 @@ const ContactPage = () => {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">Email</h3>
-                      <p className="text-gray-600">info@lele-ngawi.com</p>
+                      <h3 className="font-semibold text-gray-800 mb-1">Email UMKM Lele Gumpang</h3>
+                      <p className="text-gray-600">info@lele-gumpang.com</p>
                     </div>
                   </div>
                   
@@ -174,9 +174,9 @@ const ContactPage = () => {
 
               {/* Quick Contact */}
               <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
-                <h3 className="text-xl font-bold mb-4">Butuh Bantuan Cepat?</h3>
+                <h3 className="text-xl font-bold mb-4">Butuh Lele Segar dari Gumpang?</h3>
                 <p className="mb-6 opacity-90">
-                  Hubungi kami langsung melalui WhatsApp untuk respon yang lebih cepat
+                  Hubungi UMKM Lele Gumpang langsung melalui WhatsApp untuk pemesanan lele segar dan respon yang lebih cepat
                 </p>
                 <a 
                   href="https://wa.me/6281234567890"

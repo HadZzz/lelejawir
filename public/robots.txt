@@ -1,0 +1,32 @@
+# robots.txt for UMKM Lele Gumpang Surakarta
+# https://lelejawir.vercel.app/robots.txt
+
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /contact
+Allow: /api/products
+Allow: /api/gallery
+
+# Disallow admin and sensitive areas
+Disallow: /admin
+Disallow: /api/auth
+Disallow: /api/debug
+Disallow: /api/test
+Disallow: /_next/
+Disallow: /uploads/
+
+# Sitemap location
+Sitemap: https://lelejawir.vercel.app/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow Google and Bing specifically
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
